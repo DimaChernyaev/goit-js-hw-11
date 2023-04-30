@@ -1,6 +1,7 @@
 import { fetchByPhoto } from "./fetchPhoto";
 import { Notify } from "notiflix";
 import { createMarcupPhoto } from "./createMarcupPhoto";
+import { scroll } from "./scroll";
 
 
 const loadMoreBtn = document.querySelector('.load-more')
@@ -17,6 +18,7 @@ async function loadMore(name, currentPage) {
         }
 
         gallery.insertAdjacentHTML('beforeend', createMarcupPhoto(data.hits))}).catch(console.error);
+        scroll(gallery);
 }
 
 export {loadMoreBtn, gallery, loadMore}
