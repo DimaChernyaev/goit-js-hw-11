@@ -1,8 +1,9 @@
 export function createMarcupPhoto(arr) {
-    const marcup = arr.map(({ webformatURL, tags, likes, views, comments, downloads }) => `
+    const marcup = arr.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
     <div class="photo-card">
-
+    <a href="${largeImageURL}">
         <img src="${webformatURL}" alt="${tags}" class="img-small" loading="lazy"/>
+    </a>
         <div class="info">
         <p class="info-item">
             <b>Likes:</b></br>
@@ -27,4 +28,4 @@ export function createMarcupPhoto(arr) {
     return marcup
 }
 
-//         <a href="${largeImageURL}"></a>
+//         

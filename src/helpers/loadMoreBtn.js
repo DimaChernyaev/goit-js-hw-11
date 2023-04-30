@@ -18,7 +18,7 @@ async function loadMore(name, currentPage) {
         }
 
         gallery.insertAdjacentHTML('beforeend', createMarcupPhoto(data.hits))}).catch(console.error);
-        scroll(gallery);
+        await scroll(gallery);
 }
 
 export {loadMoreBtn, gallery, loadMore}

@@ -4,7 +4,8 @@ import { gallery } from "./helpers/loadMoreBtn";
 import { fetchByPhoto } from "./helpers/fetchPhoto";
 import { createMarcupPhoto } from "./helpers/createMarcupPhoto";
 import { loadMoreBtn } from "./helpers/loadMoreBtn";
-import { modalOpen } from "./helpers/modalOpen";
+// import { modalOpen } from "./helpers/modalOpen";
+
 
 
 const form = document.querySelector('#search-form');
@@ -18,13 +19,6 @@ loadMoreBtn.addEventListener('click', () => {
     loadMore(searchInput, currentPage);
 });
 loadMoreBtn.classList.add('is-hidden');
-
-// gallery.addEventListener('click', (event) => {
-//     event.preventDefault();
-
-//     modalOpen();
-// })
-
 
 
 
