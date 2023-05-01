@@ -4,12 +4,13 @@ import { gallery } from "./helpers/loadMoreBtn";
 import { fetchByPhoto } from "./helpers/fetchPhoto";
 import { createMarcupPhoto } from "./helpers/createMarcupPhoto";
 import { loadMoreBtn } from "./helpers/loadMoreBtn";
-// import { modalOpen } from "./helpers/modalOpen";
+import { modalOpen } from "./helpers/modalOpen";
 
-const targetEl = document.querySelector('.js-observer');
+// const targetEl = document.querySelector('.js-observer');
 const form = document.querySelector('#search-form');
 form.addEventListener('submit', searchPhoto);
 loadMoreBtn.classList.add('is-hidden');
+console.log(gallery);
 
 let currentPage = 1;
 let searchInput = '';
@@ -34,22 +35,29 @@ async function searchPhoto(event) {
         form.reset();
         gallery.innerHTML = '';
         return
-    } else {
-        await fetchByPhoto(searchInput, currentPage).then(({data}) =>     
+    }
 
-        {if (!data.totalHits) {
+    try {
+        const { data } = await fetchByPhoto(searchInput, currentPage);
+
+        if (!data.totalHits) {
             Notify.failure("Sorry, there are no images matching your search query. Please try again.")
             form.reset();
             gallery.innerHTML = '';
             return
         }
-    
+
         gallery.insertAdjacentHTML('beforeend', createMarcupPhoto(data.hits)); 
         Notify.success(`Hooray! We found ${data.totalHits} images.`);
         form.reset();
-        // observer.observe(targetEl); Обсервер працює але чомусь фетч робить і при пустому інпуті
-        loadMoreBtn.classList.remove('is-hidden'); 
-        }).catch(console.error);
+        // observer.observe(targetEl);
+        if (data.hits.length === 40) {
+            loadMoreBtn.classList.remove('is-hidden');
+        }
+        modalOpen();
+    } catch (error) {
+        console.error(error);
+        Notify.failure(`Sorry, an error occurred. Please try again`);
     }
 }
 
@@ -57,7 +65,11 @@ async function searchPhoto(event) {
 
 
 
-// Функція інфініті скрол через обсервер
+
+
+
+
+// Функція інфініті скрол через обсервер но кнопочка прикольніше =)
 // const options = {
 //     root: null,
 //     threshold: 1.0,
@@ -68,12 +80,13 @@ async function searchPhoto(event) {
 //     await entries.forEach(entry => {
 //         if (entry.isIntersecting) {
 //             currentPage += 1;
-//             loadMore(searchInput, currentPage);
+//             loadMoreBtn(searchInput, currentPage);
 //         }
 //     })
 // };
 
 // const observer = new IntersectionObserver(loadMoreScroll, options);
+
 
 
 

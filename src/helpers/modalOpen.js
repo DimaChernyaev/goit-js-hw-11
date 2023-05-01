@@ -1,13 +1,16 @@
-// import SimpleLightbox from "simplelightbox";
-// import "simplelightbox/dist/simple-lightbox.min.css";
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
-// export function modalOpen() {
+export function modalOpen() {
 
-//     new SimpleLightbox('.gallery a', {
-//         overlayOpacity: 0.3,
-//         captionDelay: 250,
-//     });
+    let gallery = new SimpleLightbox('.gallery a', { 
+        overlayOpacity: 0.3,
+        captionSelector: "img",
+        captionType: "attr",
+        captionDelay: 250,
+        captionsData: "alt",
+    });
 
-// }
+    gallery.refresh();
 
-// ПОКИ ЩО НЕ РОЗІБРАВСЯ В ПРОЦЕСІ
+}
